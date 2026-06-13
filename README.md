@@ -156,7 +156,7 @@ pnpm build
 ## Live Demo
 
 Deployed Application:
-[Add deployment URL here]
+https://ayush-survey-builder.pages.dev
 
 ## Walkthrough Video
 
