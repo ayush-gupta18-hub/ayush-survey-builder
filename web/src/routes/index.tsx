@@ -1,16 +1,26 @@
-import { createFileRoute } from '@tanstack/react-router'
+// web/src/routes/index.tsx
+import { createFileRoute, Navigate } from '@tanstack/react-router'
+import Spinner from '../components/Spinner'
+import { useAuth } from '../context/AuthContext'
 
 export const Route = createFileRoute('/')({
-  component: Home,
+  component: IndexRoute,
 })
 
-function Home() {
-  return (
-    <main style={{ padding: 24, fontFamily: 'system-ui, sans-serif' }}>
-      <h1>Survey Builder — starter</h1>
-      <p>
-        Replace this with the app. See <code>README.md</code> at the repo root.
-      </p>
-    </main>
-  )
+function IndexRoute() {
+  const { user, loading } = useAuth()
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Spinner />
+      </div>
+    )
+  }
+
+  if (user) {
+    return <Navigate to="/dashboard" replace />
+  }
+
+  return <Navigate to="/login" replace />
 }

@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "dev": "concurrently -n api,web -c blue,magenta \"pnpm --filter sde-intern-task-api dev\" \"pnpm --filter sde-intern-task-web dev\"",
+    "dev": "concurrently -n api,web -c blue,magenta \"npx pnpm --filter sde-intern-task-api dev\" \"npx pnpm --filter sde-intern-task-web dev\"",
     "build": "pnpm --filter sde-intern-task-web build",
     "typecheck": "pnpm -r typecheck",
     "check": "biome check .",
