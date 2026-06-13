@@ -161,7 +161,7 @@ https://ayush-survey-builder.pages.dev
 ## Walkthrough Video
 
 Loom Recording:
-[Add walkthrough video link here]
+https://www.loom.com/share/8bafe89d517641b988c0eb7e833ae9a9
 
 ## Key Product Decisions
 
