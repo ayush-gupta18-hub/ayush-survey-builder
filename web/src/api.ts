@@ -1,7 +1,14 @@
 // web/src/api.ts
 import type { Question, Survey, SurveyResponse, User } from './types'
 
-export const BASE_URL = import.meta.env.VITE_API_URL || '/api'
+const getApiUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL
+  if (!envUrl) return '/api'
+  const url = envUrl.endsWith('/') ? envUrl.slice(0, -1) : envUrl
+  return url.endsWith('/api') ? url : `${url}/api`
+}
+
+export const BASE_URL = getApiUrl()
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const url = `${BASE_URL}${path}`
