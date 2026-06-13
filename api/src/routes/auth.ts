@@ -107,9 +107,10 @@ authRouter.get('/github/callback', async (c) => {
     )
 
     // 6. Set HttpOnly cookie
+    const sameSite = c.env.FRONTEND_URL?.includes('localhost') ? 'Lax' : 'None'
     setCookie(c, 'token', jwt, {
       httpOnly: true,
-      sameSite: 'Lax',
+      sameSite,
       path: '/',
       secure: true,
       maxAge: 60 * 60 * 24 * 7, // 7 days
@@ -124,10 +125,11 @@ authRouter.get('/github/callback', async (c) => {
 })
 
 authRouter.post('/logout', (c) => {
+  const sameSite = c.env.FRONTEND_URL?.includes('localhost') ? 'Lax' : 'None'
   deleteCookie(c, 'token', {
     path: '/',
     httpOnly: true,
-    sameSite: 'Lax',
+    sameSite,
     secure: true,
   })
   return c.json({ ok: true })

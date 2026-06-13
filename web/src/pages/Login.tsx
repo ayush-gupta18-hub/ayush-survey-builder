@@ -1,6 +1,7 @@
 // web/src/pages/Login.tsx
 import { Navigate } from '@tanstack/react-router'
 import { useState } from 'react'
+import { BASE_URL } from '../api'
 import Spinner from '../components/Spinner'
 import { useAuth } from '../context/AuthContext'
 
@@ -61,7 +62,7 @@ export default function Login() {
 
             {/* 2. Loading state */}
             <a
-              href="/api/auth/github"
+              href={`${BASE_URL}/auth/github`}
               onClick={handleSignInClick}
               className={`w-full flex items-center justify-center px-4 py-3 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-950 transition-all cursor-pointer ${
                 isSigningIn ? 'opacity-70 cursor-not-allowed pointer-events-none' : ''
