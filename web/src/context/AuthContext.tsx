@@ -17,6 +17,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   const refreshUser = async () => {
+    const params = new URLSearchParams(window.location.search)
+    const urlToken = params.get('token')
+    if (urlToken) {
+      localStorage.setItem('token', urlToken)
+      const newUrl = window.location.pathname + window.location.hash
+      window.history.replaceState({}, document.title, newUrl)
+    }
+
     try {
       const data = await getMe()
       setUser(data)

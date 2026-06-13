@@ -11,7 +11,13 @@ export type AuthVariables = {
 
 export const authMiddleware = createMiddleware<{ Bindings: Env; Variables: AuthVariables }>(
   async (c, next) => {
-    const token = getCookie(c, 'token')
+    let token = getCookie(c, 'token')
+    if (!token) {
+      const authHeader = c.req.header('Authorization')
+      if (authHeader?.startsWith('Bearer ')) {
+        token = authHeader.substring(7)
+      }
+    }
     if (!token) {
       return c.json({ error: 'Unauthorized: Missing token' }, 401)
     }

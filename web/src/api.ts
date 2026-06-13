@@ -17,6 +17,11 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
     headers.set('Content-Type', 'application/json')
   }
 
+  const token = localStorage.getItem('token')
+  if (token) {
+    headers.set('Authorization', `Bearer ${token}`)
+  }
+
   const response = await fetch(url, {
     ...options,
     headers,
@@ -49,6 +54,7 @@ export function getMe(): Promise<User> {
 }
 
 export async function logout(): Promise<void> {
+  localStorage.removeItem('token')
   await request<void>('/auth/logout', { method: 'POST' })
 }
 

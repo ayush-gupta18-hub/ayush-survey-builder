@@ -116,8 +116,8 @@ authRouter.get('/github/callback', async (c) => {
       maxAge: 60 * 60 * 24 * 7, // 7 days
     })
 
-    // 7. Redirect to frontend dashboard
-    return c.redirect(`${c.env.FRONTEND_URL}/dashboard`)
+    // 7. Redirect to frontend dashboard with token in query param
+    return c.redirect(`${c.env.FRONTEND_URL}/dashboard?token=${jwt}`)
   } catch (err) {
     const errMsg = err instanceof Error ? err.message : 'Authentication failed'
     return c.json({ error: errMsg }, 500)
